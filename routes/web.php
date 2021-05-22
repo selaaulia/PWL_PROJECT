@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BukuController;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//BukuAdmin
+Route::get('buku/cari/',[BukuController::class, 'search']);
+Route::resource('buku', BukuController::class);
 
 Route::get('/', function () {
     return view('welcome');
