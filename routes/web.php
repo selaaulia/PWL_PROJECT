@@ -3,6 +3,9 @@
 use App\Http\Controllers\AnggotaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BukuController;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::resource('anggota', AnggotaController::class);
+
+//BukuAdmin
+Route::get('buku/cari/',[BukuController::class, 'search']);
+Route::resource('buku', BukuController::class);
 
 Route::get('/', function () {
     return view('welcome');
