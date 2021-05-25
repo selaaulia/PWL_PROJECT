@@ -145,4 +145,16 @@ class AnggotaController extends Controller
         return redirect()->route('anggota.index')
             ->with('success', 'Anggota Berhasil Dihapus');
     }
+
+    public function search(Request $request)
+    {
+        $paginate = Anggota::when($request->keyword, function ($query) use ($request) {
+            $query->where('Nama', 'like', "%{$request->keyword}%")
+                ->orWhere('Nim', 'like', "%{$request->keyword}%")
+                ->orWhere('Kelas', 'like', "%{$request->keyword}%")
+                ->orWhere('Jurusan', 'like', "%{$request->keyword}%");
+        })->paginate(5);
+        $paginate->appends($request->only('keyword'));
+        return view('anggota.index', compact('paginate'));
+    }
 }

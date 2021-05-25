@@ -8,9 +8,9 @@
             </div>
 
             <div class="float-left my-4">
-                <form action="/mahasiswa/cari/" method="GET">
+                <form action="/buku/cari/" method="GET">
                     <div class="input-group">
-                        <input type="text" name="keyword" class="form-control" placeholder="Search users...">
+                        <input type="text" name="keyword" class="form-control" placeholder="Search books...">
                         <button type="submit" class="btn btn-primary">
                             Search
                         </button>

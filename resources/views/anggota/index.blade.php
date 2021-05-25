@@ -6,7 +6,7 @@
                 <h2>PERPUSTAKAAN POLITEKNIK NEGERI MALANG</h2>
             </div>
 
-            {{-- <div class="float-left my-4">
+            <div class="float-left my-4">
                 <form action="/anggota/cari/" method="GET">
                     <div class="input-group">
                         <input type="text" name="keyword" class="form-control" placeholder="Search users...">
@@ -15,7 +15,7 @@
                         </button>
                     </div>
                 </form>
-            </div> --}}
+            </div>
             
             <div class="float-right my-2">
                 <a class="btn btn-success" href="{{ route('anggota.create') }}"> Input anggota</a>
