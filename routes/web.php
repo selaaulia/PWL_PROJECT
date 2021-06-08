@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,24 +27,43 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::middleware(['admin'])->group(function () {
-        Route::get('admin', [AdminController::class, 'index']);
-        //CRUD Anggota
-        Route::get('anggota/cari/', [AnggotaController::class, 'search']);
-        Route::resource('anggota', AnggotaController::class);
+        Route::prefix('admin')->group(function () {
+            Route::get('/', [AdminController::class, 'index']);
 
-        //CRUD Buku
-        Route::get('buku/cari/', [BukuController::class, 'search']);
-        Route::resource('buku', BukuController::class);
+            //CRUD Anggota
+            Route::get('/anggota/cari/', [AnggotaController::class, 'search']);
+            Route::resource('/anggota', AnggotaController::class);
+
+            //CRUD Buku
+            Route::get('/buku/cari/', [BukuController::class, 'search']);
+            Route::resource('/buku', BukuController::class);
+        });
     });
 
     Route::middleware(['petugas'])->group(function () {
-        Route::get('petugas', [PetugasController::class, 'index']);
+        Route::prefix('petugas')->group(function () {
+            Route::get('/', [PetugasController::class, 'index']);
+            //CRUD Anggota
+            Route::get('/anggota/cari/', [AnggotaController::class, 'search']);
+            Route::resource('/anggota', AnggotaController::class);
+
+            //CRUD Buku
+            Route::get('/buku/cari/', [BukuController::class, 'search']);
+            Route::resource('/buku', BukuController::class);
+        });
     });
 
     Route::middleware(['anggota'])->group(function () {
-        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::prefix('anggota')->group(function () {
+            Route::get('/', [AnggotaController::class, 'home']);
+
+            //DATA Buku
+            Route::get('/buku', [AnggotaController::class, 'buku']);
+            Route::get('/buku/{id}', [AnggotaController::class, 'lihatbuku']);
+        });
     });
 
     Route::get('/logout', function () {

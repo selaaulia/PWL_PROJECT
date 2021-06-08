@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggota;
+use App\Models\Buku;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class AnggotaController extends Controller
@@ -15,7 +19,7 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        $anggota = Anggota::all(); // Mengambil semua isi tabel
+        $anggota = Anggota::with('user')->get();
         $paginate = Anggota::orderBy('Nim', 'asc')->paginate(5);
         return view('anggota.index', ['anggota'=>$anggota, 'paginate' => $paginate]);
     }
@@ -44,26 +48,40 @@ class AnggotaController extends Controller
             'Kelas' => 'required',
             'Jurusan' => 'required',
             'No_Hp' => 'required',
-            'Email' => 'required',
+            'email' => 'required',
             'Gambar'=> 'required|file|image|mimes:jpeg,png,jpg',
+            'username' => 'required', 'string', 'max:20', 'unique:users',
+            'password' => 'required', 'string', 'min:8',
         ]);
 
         if ($request->file('Gambar')) {
             $image_name = $request->file('Gambar')->store('images', 'public');
         }
 
+        $user = new User();
+        $user->username = $request->get('username');
+        $user->password = $request->get('password');
+        $user->name = $request->get('Nama');
+        $user->email = $request->get('email');
+        $user->role = 'anggota';
+        $user->save();
+        
         $anggota = new Anggota;
         $anggota->nim = $request->get('Nim');
-        $anggota->nama = $request->get('Nama');
         $anggota->kelas = $request->get('Kelas');
         $anggota->jurusan = $request->get('Jurusan');
         $anggota->no_hp = $request->get('No_Hp');
-        $anggota->email = $request->get('Email');
         $anggota->gambar = $image_name;
+        $anggota->user()->associate($user);
         $anggota->save();
 
-        return redirect()->route('anggota.index')
-            ->with('success', 'anggota Berhasil Ditambahkan');
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to('/admin/anggota')
+                ->with('success', 'Anggota Berhasil ditambahkan');
+        } else {
+            return redirect()->to('/petugas/anggota')
+                ->with('success', 'Anggota Berhasil ditambahkan');
+        }
     }
 
     /**
@@ -74,7 +92,7 @@ class AnggotaController extends Controller
      */
     public function show($Nim)
     {
-        $anggota = Anggota::find($Nim);
+        $anggota = Anggota::with('user')->where('nim', $Nim)->first();
         return view('anggota.detail', ['anggota'=>$anggota]);
     }
 
@@ -86,7 +104,7 @@ class AnggotaController extends Controller
      */
     public function edit($Nim)
     {
-        $Anggota = Anggota::find($Nim);
+        $Anggota = Anggota::with('user')->where('nim', $Nim)->first();
         return view('anggota.edit', compact('Anggota'));
     }
 
@@ -106,6 +124,7 @@ class AnggotaController extends Controller
             'Jurusan' => 'required',
             'No_Hp' => 'required',
             'Email' => 'required',
+            'username' => 'required', 'string', 'max:20', 'unique:users',
         ]);
 
         $anggota = Anggota::where('Nim', $Nim)->first();
@@ -119,16 +138,28 @@ class AnggotaController extends Controller
             $anggota->gambar = $image_name;
         }
 
+        $userid = $anggota->user_id;
+        $user = User::find($userid);
+        $user->username = $request->get('username');
+        $user->name = $request->get('Nama');
+        $user->email = $request->get('Email');
+        $user->role = 'anggota';
+        $user->save();
+
         $anggota->nim = $request->get('Nim');
-        $anggota->nama = $request->get('Nama');
         $anggota->kelas = $request->get('Kelas');
         $anggota->jurusan = $request->get('Jurusan');
         $anggota->no_hp = $request->get('No_Hp');
-        $anggota->email = $request->get('Email');
+        $anggota->user()->associate($user);
         $anggota->save();
 
-        return redirect()->route('anggota.index')
-            ->with('success', 'Anggota Berhasil Diupdate');
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to('/admin/anggota')
+                ->with('success', 'Anggota Berhasil Diupdate');
+        } else {
+            return redirect()->to('/petugas/anggota')
+                ->with('success', 'Anggota Berhasil Diupdate');
+        }
     }
 
     /**
@@ -140,21 +171,43 @@ class AnggotaController extends Controller
     public function destroy($Nim)
     {
         $anggota = Anggota::find($Nim);
-        Storage::delete('storage/app/public/' . $anggota->gambar);
+        $user_id = $anggota->user_id;
+        $user = User::find($user_id);
+        File::delete('images/' . $anggota->gambar);
         $anggota->delete();
+        $user->delete();
         return redirect()->route('anggota.index')
-            ->with('success', 'Anggota Berhasil Dihapus');
+            ->with('success', 'anggota Berhasil Dihapus');
+
     }
 
     public function search(Request $request)
     {
-        $paginate = Anggota::when($request->keyword, function ($query) use ($request) {
-            $query->where('Nama', 'like', "%{$request->keyword}%")
+        $paginate = Anggota::join('users', 'anggotas.user_id', '=', 'users.id')->when($request->keyword, function ($query) use ($request) {
+            $query->where('name', 'like', "%{$request->keyword}%")
                 ->orWhere('Nim', 'like', "%{$request->keyword}%")
                 ->orWhere('Kelas', 'like', "%{$request->keyword}%")
                 ->orWhere('Jurusan', 'like', "%{$request->keyword}%");
         })->paginate(5);
         $paginate->appends($request->only('keyword'));
         return view('anggota.index', compact('paginate'));
+    }
+
+    public function home()
+    {
+        $user = Auth::user();
+        return view('home', compact('user'));
+    }
+
+    public function buku()
+    {
+        $bukus = Buku::all();
+        return view('anggota.indexbuku', ['bukus' => $bukus]);
+    }
+
+    public function lihatbuku($id)
+    {
+        $bukus = Buku::find($id);
+        return view('anggota.detailbuku', compact('bukus'));
     }
 }

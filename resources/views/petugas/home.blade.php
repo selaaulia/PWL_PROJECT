@@ -1,24 +1,12 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Home Petugas')
+
+@section('content_header')
+    <h1>Home Petugas</h1>
+@stop
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    <p>Selamat datang di Perpustakaan {{$user->name}}.</p>
+@stop
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                    <p>halaman petugas perpustakaan</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection

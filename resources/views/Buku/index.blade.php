@@ -8,7 +8,11 @@
             </div>
 
             <div class="float-left my-4">
-                <form action="/buku/cari/" method="GET">
+                @if (Auth::user()->role == 'admin')
+                    <form action="/admin/buku/cari/" method="GET">
+                    @else
+                        <form action="/petugas/buku/cari/" method="GET">
+                @endif
                     <div class="input-group">
                         <input type="text" name="keyword" class="form-control" placeholder="Search books...">
                         <button type="submit" class="btn btn-primary">
@@ -17,9 +21,13 @@
                     </div>
                 </form>
             </div>
-            
+
             <div class="float-right my-2">
-                <a class="btn btn-success" href="{{ route('buku.create') }}"> Input Buku</a>
+                @if (Auth::user()->role == 'admin')
+                    <a class="btn btn-success" href="/admin/buku/create"> Input Buku</a>
+                @else
+                    <a class="btn btn-success" href="/petugas/buku/create"> Input Buku</a>
+                @endif
             </div>
         </div>
     </div>
@@ -58,23 +66,40 @@
                     <td>{{ $Buku->tahun }}</td>
                     <td>{{ $Buku->jumlah }}</td>
                     <td>
-                        <form action="{{ route('buku.destroy', $Buku->id_buku) }}" method="POST">
+                        @if (Auth::user()->role == 'admin')
+                            <form action="/admin/buku/{{ $Buku->id_buku }}" method="POST">
 
-                            <a class="btn btn-info" href="{{ route('buku.show', $Buku->id_buku) }}">Lihat</a>
+                                <a class="btn btn-info" href="/admin/buku/{{ $Buku->id_buku }}">Lihat</a>
 
-                            <a class="btn btn-primary" href="{{ route('buku.edit', $Buku->id_buku) }}">Edit</a>
+                                <a class="btn btn-primary" href="/admin/buku/{{ $Buku->id_buku }}/edit">Edit</a>
 
-                            @csrf
-                            @method('DELETE')
+                                @csrf
+                                @method('DELETE')
 
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
-                        </form>
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+                            </form>
+                        @else
+                            <form action="/petugas/buku/{{ $Buku->id_buku }}" method="POST">
+
+                                <a class="btn btn-info" href="/petugas/buku/{{ $Buku->id_buku }}">Lihat</a>
+
+                                <a class="btn btn-primary" href="/petugas/buku/{{ $Buku->id_buku }}/edit">Edit</a>
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+                            </form>
+                        @endif
+
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     <div class="d-flex">
-    {{ $bukus->links() }}
+        {{ $bukus->links() }}
     </div>
 @endsection

@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Buku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BukuController extends Controller
 {
@@ -51,8 +53,13 @@ class BukuController extends Controller
         ]);
 
         Buku::create($request->all());
-        return redirect()->route('buku.index')
-        ->with('success', 'Buku Berhasil Ditambahkan');
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to('/admin/buku')
+                ->with('success', 'Buku Berhasil Ditambahkan');
+        } else {
+            return redirect()->to('/petugas/buku')
+                ->with('success', 'Buku Berhasil Ditambahkan');
+        }
     }
 
     /**
@@ -98,13 +105,19 @@ class BukuController extends Controller
             'no_rak' => 'required',
             'tahun' => 'required',
             'jumlah' => 'required',
-            ]);
+        ]);
 
-         //fungsi eloquent untuk mengupdate data inputan kita
-         Buku::find($id)->update($request->all());
+        //fungsi eloquent untuk mengupdate data inputan kita
+        Buku::find($id)->update($request->all());
 
-         //jika data berhasil diupdate, akan kembali ke halaman utama
-         return redirect()->route('buku.index')->with('success', 'Buku Berhasil Diupdate');
+        //jika data berhasil diupdate, akan kembali ke halaman utama
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to('/admin/buku')
+                ->with('success', 'Buku Berhasil Diubah');
+        } else {
+            return redirect()->to('/petugas/buku')
+                ->with('success', 'Buku Berhasil Diubah');
+        }
     }
 
     /**
@@ -116,29 +129,31 @@ class BukuController extends Controller
     public function destroy($id)
     {
         Buku::find($id)->delete();
-        return redirect()->route('buku.index') -> with('success', 'Buku Berhasil Dihapus');
+        return redirect()->route('buku.index')->with('success', 'Buku Berhasil Dihapus');
     }
 
     public function search(Request $request)
     {
         $bukus = Buku::where([
-            ['kode_buku', '!=', null, 'OR', 'judul_buku', '!=', null, 'OR', 'kategori_buku', '!=', null, 'OR', 'tahun', '!=', null,
-            'OR', 'nama_penerbit', '!=', null, 'OR', 'nama_penulis', '!=', null],
-            [function ($query) use ($request){
+            [
+                'kode_buku', '!=', null, 'OR', 'judul_buku', '!=', null, 'OR', 'kategori_buku', '!=', null, 'OR', 'tahun', '!=', null,
+                'OR', 'nama_penerbit', '!=', null, 'OR', 'nama_penulis', '!=', null
+            ],
+            [function ($query) use ($request) {
                 if (($keyword = $request->keyword)) {
-                    $query  ->orWhere('kode_buku', 'like', "%{$keyword}%")
-                            ->orWhere('judul_buku', 'like', "%{$keyword}%")
-                            ->orWhere('kategori_buku', 'like', "%{$keyword}%")
-                            ->orWhere('tahun', 'like', "%{$keyword}%")
-                            ->orWhere('nama_penerbit', 'like', "%{$keyword}%")
-                            ->orWhere('nama_penulis', 'like', "%{$keyword}%");
+                    $query->orWhere('kode_buku', 'like', "%{$keyword}%")
+                        ->orWhere('judul_buku', 'like', "%{$keyword}%")
+                        ->orWhere('kategori_buku', 'like', "%{$keyword}%")
+                        ->orWhere('tahun', 'like', "%{$keyword}%")
+                        ->orWhere('nama_penerbit', 'like', "%{$keyword}%")
+                        ->orWhere('nama_penulis', 'like', "%{$keyword}%");
                 }
             }]
         ])
-        ->orderBy('id_buku')
-        ->paginate(5);
-    
+            ->orderBy('id_buku')
+            ->paginate(5);
+
         return view('buku.index', compact('bukus'))
-        ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 }

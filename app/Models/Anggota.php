@@ -21,4 +21,9 @@ class Anggota extends Model
         'Gambar',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

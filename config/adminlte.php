@@ -229,7 +229,7 @@ return [
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
-            'topnav_right' => false,
+            'topnav_right' => true,
         ],
         [
             'type'         => 'fullscreen-widget',
@@ -238,22 +238,11 @@ return [
 
         // Sidebar items:
         [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Home',
+            'url'  => 'admin',
+            'icon' => 'fas fa-home',
         ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
+        ['header' => 'Account Setting'],
         [
             'text' => 'profile',
             'url'  => 'admin/settings',
@@ -264,59 +253,88 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        ['header' => 'Menu'],
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text'    => 'Data Pengguna',
+            'icon'    => 'fas fa-users',
             'submenu' => [
                 [
-                    'text' => 'level_one',
+                    'text' => 'Data Admin',
+                    'url'  => '/admin/admin',
+                ],
+                [
+                    'text' => 'Data Petugas',
+                    'url'  => '/admin/petugas',
+                ],
+                [
+                    'text' => 'Data Anggota',
+                    'url'  => '/admin/anggota',
+                ],
+            ],
+            'can' => 'admin-only',
+        ],
+        [
+            'text' => 'Data Buku',
+            'url'  => '/admin/buku',
+            'icon' => 'fas fa-book',
+            'can' => 'admin-only',
+        ],
+        [
+            'text' => 'Data Peminjaman',
+            'url'  => '#',
+            'icon' => 'fas fa-file',
+            'can' => 'admin-only',
+        ],
+        [
+            'text' => 'Cetak Laporan',
+            'url'  => '#',
+            'icon' => 'fas fa-file-pdf',
+            'can' => 'admin-only',
+        ],
+        [
+            'text' => 'Data Buku',
+            'url'  => '/petugas/buku',
+            'icon' => 'fas fa-book',
+            'can' => 'petugas-only',
+        ],
+        [
+            'text' => 'Data Anggota',
+            'url'  => '/petugas/anggota',
+            'icon' => 'fas fa-users',
+            'can' => 'petugas-only',
+        ],
+        [
+            'text'    => 'Transaksi',
+            'icon'    => 'fas fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Entri Peminjaman',
                     'url'  => '#',
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
+                    'text' => 'Entri Pengembalian',
                     'url'  => '#',
                 ],
             ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
+            'can' => 'petugas-only',
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+            'text' => 'Cetak Laporan',
+            'url'  => '#',
+            'icon' => 'fas fa-file-pdf',
+            'can' => 'petugas-only',
         ],
         [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
+            'text' => 'Data Buku',
+            'url'  => '/anggota/buku',
+            'icon' => 'fas fa-book',
+            'can' => 'anggota-only',
+        ],
+        [
+            'text' => 'Entri Peminjaman',
+            'url'  => '#',
+            'icon' => 'fas fa-share',
+            'can' => 'anggota-only',
         ],
     ],
 
@@ -356,21 +374,21 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
             ],

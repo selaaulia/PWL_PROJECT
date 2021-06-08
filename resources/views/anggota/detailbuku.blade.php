@@ -21,12 +21,7 @@
                         <li class="list-group-item"><b>Jumlah: </b>{{ $bukus->jumlah }}</li>
                     </ul>
                 </div>
-                @if (Auth::user()->role == 'admin')
-                <a class="btn btn-success mt-3" href="/admin/buku">Kembali</a>
-                @else
-                <a class="btn btn-success mt-3" href="/petugas/buku">Kembali</a>
-                @endif
-                
+                <a class="btn btn-success mt-3" href="/anggota/buku">Kembali</a>
 
             </div>
         </div>

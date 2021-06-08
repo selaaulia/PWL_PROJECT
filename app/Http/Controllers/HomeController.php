@@ -24,7 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        return view('home', compact('user'));
+        $role = Auth::user()->role;
+        if ($role == "admin") {
+            return redirect()->to('/admin');
+        } else if ($role == "petugas") {
+            return redirect()->to('/petugas');
+        } else if ($role == "anggota") {
+            return redirect()->to('/anggota');
+        } else {
+            return redirect()->to('logout');
+        }
     }
 }
