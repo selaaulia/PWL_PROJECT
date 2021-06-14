@@ -196,7 +196,7 @@ class AnggotaController extends Controller
     public function home()
     {
         $user = Auth::user();
-        return view('home', compact('user'));
+        return view('anggota.home', compact('user'));
     }
 
     public function buku()
