@@ -15,13 +15,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $name = ['Admin', 'Izaq Aldi'];
-        $email = ['admin@gmail.com', 'izaqaldi@gmail.com'];
-        $password = ['12345678', '12345678'];
-        $username = ['admin', 'izaqaldi'];
-        $role = ['admin', 'petugas'];
+        $name = ['Admin', 'Izaq Aldi', 'Sela Aulia'];
+        $email = ['admin@gmail.com', 'izaqaldi@gmail.com', 'selaaulia@email.com'];
+        $password = ['12345678', '12345678', '12345678'];
+        $username = ['admin', 'izaqaldi', 'selaaulia'];
+        $role = ['admin', 'petugas', 'anggota'];
 
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             DB::table('users')->insert([
                 'name' => $name[$i],
                 'email' => $email[$i],

@@ -7,18 +7,27 @@
             </div>
 
             <div class="float-left my-4">
-                <form action="/anggota/cari/" method="GET">
-                    <div class="input-group">
-                        <input type="text" name="keyword" class="form-control" placeholder="Search users...">
-                        <button type="submit" class="btn btn-primary">
-                            Search
-                        </button>
-                    </div>
+                @if (Auth::user()->role == 'admin')
+                    <form action="/admin/anggota/cari/" method="GET">
+                    @else
+                        <form action="/petugas/anggota/cari/" method="GET">
+                @endif
+
+                <div class="input-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="Search users...">
+                    <button type="submit" class="btn btn-primary">
+                        Search
+                    </button>
+                </div>
                 </form>
             </div>
-            
+
             <div class="float-right my-2">
-                <a class="btn btn-success" href="{{ route('anggota.create') }}"> Input anggota</a>
+                @if (Auth::user()->role == 'admin')
+                    <a class="btn btn-success" href="/admin/anggota/create"> Input anggota</a>
+                @else
+                    <a class="btn btn-success" href="/petugas/anggota/create"> Input anggota</a>
+                @endif
             </div>
         </div>
     </div>
@@ -46,26 +55,41 @@
             @foreach ($paginate as $Anggota)
                 <tr>
                     <td>{{ $Anggota->Nim }}</td>
-                    <td>{{ $Anggota->Nama }}</td>
-                    <td>{{ $Anggota->Kelas}}</td>
+                    <td>{{ $Anggota->user->name }}</td>
+                    <td>{{ $Anggota->Kelas }}</td>
                     <td>{{ $Anggota->Jurusan }}</td>
                     <td>{{ $Anggota->No_Hp }}</td>
-                    <td>{{ $Anggota->Email }}</td>
+                    <td>{{ $Anggota->user->email }}</td>
                     <td><img src="{{ asset('storage/' . $Anggota->Gambar) }}" width="100px;" height="100px;" alt=""></td>
                     <td>
-                        <form action="{{ route('anggota.destroy', $Anggota->Nim) }}" method="POST">
+                        @if (Auth::user()->role == 'admin')
+                            <form action="/admin/anggota/{{ $Anggota->Nim }}" method="POST">
 
-                            <a class="btn btn-info" href="{{ route('anggota.show', $Anggota->Nim) }}">Show</a>
+                                <a class="btn btn-info" href="/admin/anggota/{{ $Anggota->Nim }}">Lihat</a>
 
-                            <a class="btn btn-primary" href="{{ route('anggota.edit', $Anggota->Nim) }}">Edit</a>
+                                <a class="btn btn-primary" href="/admin/anggota/{{ $Anggota->Nim }}/edit">Edit</a>
 
-                            @csrf
-                            @method('DELETE')
+                                @csrf
+                                @method('DELETE')
 
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin menghapus data ini?')">Delete</button>
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+                            </form>
+                        @else
+                            <form action="/petugas/anggota/{{ $Anggota->Nim }}" method="POST">
 
-                            {{-- <a class="btn btn-warning" href="/anggota/nilai/{{$Anggota->Nim}}">Nilai</a> --}}
-                        </form>
+                                <a class="btn btn-info" href="/petugas/anggota/{{ $Anggota->Nim }}">Lihat</a>
+
+                                <a class="btn btn-primary" href="/petugas/anggota/{{ $Anggota->Nim }}/edit">Edit</a>
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+                            </form>
+                        @endif
+
                     </td>
                 </tr>
             @endforeach

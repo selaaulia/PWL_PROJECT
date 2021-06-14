@@ -21,7 +21,12 @@
                         <li class="list-group-item"><b>Jumlah: </b>{{ $bukus->jumlah }}</li>
                     </ul>
                 </div>
-                <a class="btn btn-success mt-3" href="{{ route('buku.index') }}">Kembali</a>
+                @if (Auth::user()->role == 'admin')
+                <a class="btn btn-success mt-3" href="/admin/buku">Kembali</a>
+                @else
+                <a class="btn btn-success mt-3" href="/petugas/buku">Kembali</a>
+                @endif
+                
 
             </div>
         </div>

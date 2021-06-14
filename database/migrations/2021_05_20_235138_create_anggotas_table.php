@@ -15,11 +15,11 @@ class CreateAnggotasTable extends Migration
     {
         Schema::create('anggotas', function (Blueprint $table) {
             $table->id('Nim');
-            $table->string("Nama")->nullable(false);
+            $table->unsignedBigInteger('user_id')->nullable(); 
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string("Kelas")->nullable(false);
             $table->string("Jurusan")->nullable(false);
             $table->string("No_Hp")->nullable(false);
-            $table->string("Email")->nullable(false);
             $table->String('Gambar', 255)->nullable();
             $table->timestamps();
         });
