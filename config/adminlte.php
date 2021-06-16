@@ -245,12 +245,12 @@ return [
         ['header' => 'Account Setting'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'url'  => '/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'url'  => '/password',
             'icon' => 'fas fa-fw fa-lock',
         ],
         ['header' => 'Menu'],

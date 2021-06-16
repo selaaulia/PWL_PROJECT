@@ -5,7 +5,9 @@ use App\Http\Controllers\AnggotaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 
 
@@ -28,6 +30,12 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::get('password', [PasswordController::class, 'edit'])->name('user.password.edit');
+
+    Route::patch('password', [PasswordController::class, 'update'])->name('user.password.update');
+
+    Route::resource('/profile', UserController::class);
 
     Route::middleware(['admin'])->group(function () {
         Route::prefix('admin')->group(function () {
