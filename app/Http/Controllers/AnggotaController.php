@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class AnggotaController extends Controller
@@ -60,7 +61,7 @@ class AnggotaController extends Controller
 
         $user = new User();
         $user->username = $request->get('username');
-        $user->password = $request->get('password');
+        $user->password = Hash::make($request->get('password'));
         $user->name = $request->get('Nama');
         $user->email = $request->get('email');
         $user->role = 'anggota';
