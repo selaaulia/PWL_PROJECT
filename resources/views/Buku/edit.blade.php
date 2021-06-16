@@ -73,6 +73,11 @@
                         <input type="jumlah" name="jumlah" class="form-control" id="jumlah" value="{{ $bukus->jumlah }}"
                             aria-describedby="jumlah">
                     </div>
+                    <div class="form-group">
+                        <label for="gambar">Gambar</label>
+                        <input type="file" name="gambar" class="form-control" id="gambar" value="{{ $bukus->gambar }}"
+                            aria-describedby="gambar">
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

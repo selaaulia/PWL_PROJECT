@@ -50,9 +50,27 @@ class BukuController extends Controller
             'no_rak' => 'required',
             'tahun' => 'required',
             'jumlah' => 'required',
+            'gambar' => 'required|file|image|mimes:jpeg,png,jpg',
         ]);
+        //TODO : Implementasikan Proses Simpan Ke Database
+        $bukus = new Buku();
+        $bukus->kode_buku = $request->get('kode_buku');
+        $bukus->judul_buku = $request->get('judul_buku');
+        $bukus->kategori_buku = $request->get('kategori_buku');
+        $bukus->nama_penulis = $request->get('nama_penulis');
+        $bukus->nama_penerbit = $request->get('nama_penerbit');
+        $bukus->no_rak = $request->get('no_rak');
+        $bukus->tahun = $request->get('tahun');
+        $bukus->jumlah = $request->get('jumlah');
+        $file = $request->file('gambar');
+        $image_name = '/images/' . $file->getClientOriginalName();
 
-        Buku::create($request->all());
+        // isi dengan nama folder tempat kemana file diupload
+        $tujuan_upload = 'images';
+        $file->move($tujuan_upload, $image_name);
+        $bukus->gambar = $image_name;
+        $bukus->save();
+
         if (Auth::user()->role == 'admin') {
             return redirect()->to('/admin/buku')
                 ->with('success', 'Buku Berhasil Ditambahkan');
@@ -105,10 +123,28 @@ class BukuController extends Controller
             'no_rak' => 'required',
             'tahun' => 'required',
             'jumlah' => 'required',
+            'gambar' => 'required',
         ]);
-
-        //fungsi eloquent untuk mengupdate data inputan kita
-        Buku::find($id)->update($request->all());
+        $bukus = Buku::find($id);
+        $bukus->kode_buku = $request->get('kode_buku');
+        $bukus->judul_buku = $request->get('judul_buku');
+        $bukus->kategori_buku = $request->get('kategori_buku');
+        $bukus->nama_penulis = $request->get('nama_penulis');
+        $bukus->nama_penerbit = $request->get('nama_penerbit');
+        $bukus->no_rak = $request->get('no_rak');
+        $bukus->tahun = $request->get('tahun');
+        $bukus->jumlah = $request->get('jumlah');
+        $buku->save();
+        if ($request->file('gambar') != null) {
+            File::delete('/images/' . $buku->gambar);
+            $file = $request->file('gambar');
+            $image_name = '/images/'.$file->getClientOriginalName();
+            $tujuan_upload = 'images';
+            $file->move($tujuan_upload, $image_name);
+            $bukus->gambar = $image_name;
+            $bukus->save();
+        }
+        
 
         //jika data berhasil diupdate, akan kembali ke halaman utama
         if (Auth::user()->role == 'admin') {

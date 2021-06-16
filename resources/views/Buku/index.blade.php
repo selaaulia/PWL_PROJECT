@@ -50,6 +50,7 @@
                 <th>Nomor Rak</th>
                 <th>Tahun Terbit</th>
                 <th>Jumlah</th>
+                <th>Gambar</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
@@ -65,6 +66,7 @@
                     <td>{{ $Buku->no_rak }}</td>
                     <td>{{ $Buku->tahun }}</td>
                     <td>{{ $Buku->jumlah }}</td>
+                    <td>{{ $Buku->gambar}}</td>
                     <td>
                         @if (Auth::user()->role == 'admin')
                             <form action="/admin/buku/{{ $Buku->id_buku }}" method="POST">

@@ -58,6 +58,11 @@
                         <label for="jumlah">Jumlah</label>
                         <input type="jumlah" name="jumlah" class="form-control" id="jumlah" aria-describedby="jumlah">
                     </div>
+                    <div class="form-group">
+                        <label for="gambar">Gambar</label>
+                            <input type="file" name="gambar" class="form-control" id="field-file"
+                                aria-describedby="gambar" value="{{ old('gambar') }}">
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
