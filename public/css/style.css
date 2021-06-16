@@ -1,0 +1,42 @@
+.body{
+  background-color: white;
+}
+.judul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  background-color: black;
+  height: 100%; /* Full height */
+  position: fixed; /* Make it stick, even on scroll */
+  overflow: auto; /* Enable scrolling if the sidenav has too much content */
+  color: white;
+  text-align: center;
+}
+.judul .judul1{
+  font-family: 'Lucida Sans';
+  font-size: 33px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30px;
+}
+.judul .judul2{
+  font-family: 'Courier New';
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-weight: 30px;
+  margin-bottom: 50px;
+}
+.judul a{
+  text-align: center; font-family:'Geneva'; font-size: 25px; text-decoration: none;color: white
+}
+.container{
+  width: 75%;
+  height: 2000px;
+  float: right;
+  background-color:white;
+  text-align: center;
+  font-style: 50px, sans-serif;
+  color: #000000;
+}
