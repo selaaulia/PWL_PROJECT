@@ -10,6 +10,7 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><img src="{{ asset('storage/' . $bukus->gambar) }}" width="200px;" height="200px;" alt=""></li>
                         <li class="list-group-item"><b>ID: </b>{{ $bukus->id_buku }}</li>
                         <li class="list-group-item"><b>Kode Buku: </b>{{ $bukus->kode_buku }}</li>
                         <li class="list-group-item"><b>Judul Buku: </b>{{ $bukus->judul_buku }}</li>

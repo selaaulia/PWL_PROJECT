@@ -28,7 +28,8 @@
                 <th>Nomor Rak</th>
                 <th>Tahun Terbit</th>
                 <th>Jumlah</th>
-                <th width="280px">Action</th>
+                <th width="200px">Gambar</th>
+                <th width="50px">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +44,7 @@
                     <td>{{ $Buku->no_rak }}</td>
                     <td>{{ $Buku->tahun }}</td>
                     <td>{{ $Buku->jumlah }}</td>
+                    <td><img src="{{ asset('storage/' . $Buku->gambar) }}" width="100px;" height="100px;" alt=""></td>
                     <td>
 
 
