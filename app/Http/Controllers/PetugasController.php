@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class PetugasController extends Controller
 {
@@ -176,11 +177,8 @@ class PetugasController extends Controller
     {
         $a = Anggota::all();
         $b = Buku::all();
-        $k = Kategori::all();
-        $anggota = count($a);
-        $buku = count($b);
-        $kategori = count($k);
-        return view('petugas.home', compact('anggota', 'buku', 'kategori'));
+        $user= Auth::user();
+        return view('petugas.home', compact('user'));
     }
 
 
