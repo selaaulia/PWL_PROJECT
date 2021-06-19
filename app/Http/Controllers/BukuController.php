@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BukuController extends Controller
 {
@@ -52,6 +53,7 @@ class BukuController extends Controller
             'jumlah' => 'required',
             'gambar' => 'required|file|image|mimes:jpeg,png,jpg',
         ]);
+
         //TODO : Implementasikan Proses Simpan Ke Database
         $bukus = new Buku();
         $bukus->kode_buku = $request->get('kode_buku');
@@ -62,13 +64,14 @@ class BukuController extends Controller
         $bukus->no_rak = $request->get('no_rak');
         $bukus->tahun = $request->get('tahun');
         $bukus->jumlah = $request->get('jumlah');
-        $file = $request->file('gambar');
-        $image_name = '/images/' . $file->getClientOriginalName();
 
-        // isi dengan nama folder tempat kemana file diupload
-        $tujuan_upload = 'images';
-        $file->move($tujuan_upload, $image_name);
-        $bukus->gambar = $image_name;
+        if ($request->file('gambar')) {
+            $image_name = $request->file('gambar')->store('images', 'public');
+            $bukus->gambar = $image_name;
+        }
+
+
+        
         $bukus->save();
 
         if (Auth::user()->role == 'admin') {
@@ -123,9 +126,18 @@ class BukuController extends Controller
             'no_rak' => 'required',
             'tahun' => 'required',
             'jumlah' => 'required',
-            'gambar' => 'required',
         ]);
         $bukus = Buku::find($id);
+
+        if ($bukus->gambar && file_exists(storage_path('app/public/' . $bukus->gambar))) {
+            Storage::delete('/storage/images/' . $bukus->gambar);
+        }
+
+        if ($request->file('gambar') != null) {
+            $image_name = $request->file('gambar')->store('images', 'public');
+            $bukus->gambar = $image_name;
+        }
+
         $bukus->kode_buku = $request->get('kode_buku');
         $bukus->judul_buku = $request->get('judul_buku');
         $bukus->kategori_buku = $request->get('kategori_buku');
@@ -134,17 +146,7 @@ class BukuController extends Controller
         $bukus->no_rak = $request->get('no_rak');
         $bukus->tahun = $request->get('tahun');
         $bukus->jumlah = $request->get('jumlah');
-        $buku->save();
-        if ($request->file('gambar') != null) {
-            File::delete('/images/' . $buku->gambar);
-            $file = $request->file('gambar');
-            $image_name = '/images/'.$file->getClientOriginalName();
-            $tujuan_upload = 'images';
-            $file->move($tujuan_upload, $image_name);
-            $bukus->gambar = $image_name;
-            $bukus->save();
-        }
-        
+        $bukus->save();        
 
         //jika data berhasil diupdate, akan kembali ke halaman utama
         if (Auth::user()->role == 'admin') {

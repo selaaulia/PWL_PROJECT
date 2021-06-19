@@ -22,9 +22,9 @@
                     @endif
 
                     @if (Auth::user()->role == 'admin')
-                        <form method="post" action="/admin/buku/{{ $bukus->id_buku }}" id="myForm">
+                        <form method="post" action="/admin/buku/{{ $bukus->id_buku }}" id="myForm" enctype="multipart/form-data">
                     @else
-                        <form method="post" action="/petugas/buku/{{ $bukus->id_buku }}" id="myForm">
+                        <form method="post" action="/petugas/buku/{{ $bukus->id_buku }}" id="myForm" enctype="multipart/form-data">
                     @endif
                     @csrf
                     @method('PUT')

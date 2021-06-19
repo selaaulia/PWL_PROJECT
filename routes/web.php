@@ -48,12 +48,16 @@ Route::middleware(['auth'])->group(function () {
             //CRUD Buku
             Route::get('/buku/cari/', [BukuController::class, 'search']);
             Route::resource('/buku', BukuController::class);
+
+            //CRUD Petugas
+            Route::get('/petugas/cari/', [PetugasController::class, 'search']);
+            Route::resource('/petugas', PetugasController::class);
         });
     });
 
     Route::middleware(['petugas'])->group(function () {
         Route::prefix('petugas')->group(function () {
-            Route::get('/', [PetugasController::class, 'index']);
+            Route::get('/', [PetugasController::class, 'home']);
             //CRUD Anggota
             Route::get('/anggota/cari/', [AnggotaController::class, 'search']);
             Route::resource('/anggota', AnggotaController::class);
