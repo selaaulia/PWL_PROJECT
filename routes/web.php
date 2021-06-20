@@ -8,6 +8,7 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 
@@ -73,6 +74,13 @@ Route::middleware(['auth'])->group(function () {
             //CRUD Buku
             Route::get('/buku/cari/', [BukuController::class, 'search']);
             Route::resource('/buku', BukuController::class);
+
+            //peminjaman petugas
+            Route::put('/transaksi/konfirmasi/{id}', [TransaksiController::class, 'konfirmasi']);
+            Route::get('/transaksi/konfirmasi', [TransaksiController::class, 'konfirmasiPeminjaman']);
+            Route::put('/transaksi/perpanjang/{id}', [TransaksiController::class, 'perpanjang']);
+            Route::resource('/transaksi', TransaksiController::class);
+
         });
     });
 
