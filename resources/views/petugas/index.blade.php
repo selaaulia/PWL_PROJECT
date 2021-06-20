@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left mt-2">
-                <h2>PERPUSTAKAAN POLITEKNIK NEGERI MALANG</h2>
+                <h2>DAFTAR PETUGAS PERPUSTAKAAN</h2>
             </div>
 
             <div class="float-left my-4">
