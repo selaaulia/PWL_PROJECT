@@ -38,11 +38,6 @@
                                 value="{{ $admin->user->username }}">
                         </div>
                         <div class="form-group">
-                            <label for="id">Id</label>
-                            <input type="text" name="id" class="form-control" id="id" aria-describedby="id"
-                                value="{{ $admin->id }}">
-                        </div>
-                        <div class="form-group">
                             <label for="nama">Nama</label>
                             <input type="nama" name="nama" class="form-control" id="nama" aria-describedby="nama"
                                 value="{{ $admin->user->name }}">

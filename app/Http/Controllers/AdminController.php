@@ -47,7 +47,6 @@ class AdminController extends Controller
         ]);
         //TODO : Implementasikan Proses Simpan Ke Database
         $admin = new Admin();
-        $admin->id = $request->get('id');
         $admin->no_hp = $request->get('no_hp');
         $admin->alamat = $request->get('alamat');
         $admin->save();
@@ -104,7 +103,6 @@ class AdminController extends Controller
     {
         $request->validate([
             'username' => 'required', 'string', 'max:20', 'unique:users',
-            'id' => 'required',
             'nama' => 'required',
             'no_hp' => 'required',
             'email' => 'required|email',
@@ -112,8 +110,6 @@ class AdminController extends Controller
         //TODO : Implementasikan Proses Simpan Ke Database
         $admin = Admin::find($id);
         $user_id = $admin->user_id;
-        $admin->id = $request->get('id');
-        $admin->tgl_lahir = $request->get('tgl_lahir');
         $admin->no_hp = $request->get('no_hp');
         $admin->alamat = $request->get('alamat');
         $admin->save();

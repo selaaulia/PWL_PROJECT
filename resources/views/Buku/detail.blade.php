@@ -10,11 +10,11 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><img src="{{ asset('storage/' . $bukus->gambar) }}" width="200px;" height="200px;" alt=""></li>
+                        <li class="list-group-item"><img src="{{ asset('storage/' . $bukus->gambar) }}" width="200px;" height="300px;" alt=""></li>
                         <li class="list-group-item"><b>ID: </b>{{ $bukus->id_buku }}</li>
                         <li class="list-group-item"><b>Kode Buku: </b>{{ $bukus->kode_buku }}</li>
                         <li class="list-group-item"><b>Judul Buku: </b>{{ $bukus->judul_buku }}</li>
-                        <li class="list-group-item"><b>:Kategori: </b>{{ $bukus->kategori_buku }}</li>
+                        <li class="list-group-item"><b>Kategori: </b>{{ $bukus->kategori_buku }}</li>
                         <li class="list-group-item"><b>Penulis: </b>{{ $bukus->nama_penulis }}</li>
                         <li class="list-group-item"><b>Penerbit: </b>{{ $bukus->nama_penerbit }}</li>
                         <li class="list-group-item"><b>Nomor Rak: </b>{{ $bukus->no_rak }}</li>

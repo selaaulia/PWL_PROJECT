@@ -66,7 +66,7 @@
                     <td>{{ $Buku->no_rak }}</td>
                     <td>{{ $Buku->tahun }}</td>
                     <td>{{ $Buku->jumlah }}</td>
-                    <td><img src="{{ asset('storage/' . $Buku->gambar) }}" width="100px;" height="100px;" alt=""></td>
+                    <td><img src="{{ asset('storage/' . $Buku->gambar) }}" width="100px;" height="150px;" alt=""></td>
                     <td>
                         @if (Auth::user()->role == 'admin')
                             <form action="/admin/buku/{{ $Buku->id_buku }}" method="POST">

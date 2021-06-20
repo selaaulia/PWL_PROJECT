@@ -19,11 +19,7 @@
                             </ul>
                         </div>
                     @endif
-                    @if (Auth::user()->role == 'admin')
-                        <form method="post" action="/admin/admin" id="myForm" enctype="multipart/form-data">
-                        @else
-                            <form method="post" action="/admin/admin" id="myForm" enctype="multipart/form-data">
-                    @endif
+                        <form method="post" action="/admin/petugas" id="myForm" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="username">Username</label>
@@ -40,16 +36,16 @@
                             aria-describedby="password">
                     </div>
                     <div class="form-group">
-                        <label for="Nama">Nama</label>
-                        <input type="Nama" name="Nama" class="form-control" id="Nama" aria-describedby="Nama">
+                        <label for="nama">Nama</label>
+                        <input type="nama" name="nama" class="form-control" id="nama" aria-describedby="nama">
                     </div>
                     <div class="form-group">
                         <label for="tgl_lahir">Tanggal Lahir</label>
-                        <input type="tgl_lahir" name="tgl_lahir" class="form-control" id="tgl_lahir" aria-describedby="tgl_lahir">
+                        <input type="date" name="tgl_lahir" class="form-control" id="tgl_lahir" aria-describedby="tgl_lahir">
                     </div>
                     <div class="form-group">
-                        <label for="No_Hp">No_Handphone</label>
-                        <input type="No_Hp" name="No_Hp" class="form-control" id="No_Hp" aria-describedby="No_Hp">
+                        <label for="no_hp">No_Handphone</label>
+                        <input type="no_hp" name="no_hp" class="form-control" id="no_hp" aria-describedby="no_hp">
                     </div>
                     <label for="alamat">Alamat </label>
                     <input type="alamat" class="form-control" name="alamat"><br>

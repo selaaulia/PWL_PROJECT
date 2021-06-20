@@ -52,7 +52,6 @@ class PetugasController extends Controller
         ]);
         //TODO : Implementasikan Proses Simpan Ke Database
         $petugas = new Petugas();
-        $petugas->id = $request->get('id');
         $petugas->tgl_lahir = $request->get('tgl_lahir');
         $petugas->no_hp = $request->get('no_hp');
         $petugas->alamat = $request->get('alamat');
@@ -110,7 +109,6 @@ class PetugasController extends Controller
     {
         $request->validate([
             'username' => 'required', 'string', 'max:20', 'unique:users',
-            'id' => 'required',
             'nama' => 'required',
             'tgl_lahir' => 'required|date',
             'no_hp' => 'required',
@@ -119,7 +117,6 @@ class PetugasController extends Controller
         //TODO : Implementasikan Proses Simpan Ke Database
         $petugas = Petugas::find($id);
         $user_id = $petugas->user_id;
-        $petugas->id = $request->get('id');
         $petugas->tgl_lahir = $request->get('tgl_lahir');
         $petugas->no_hp = $request->get('no_hp');
         $petugas->alamat = $request->get('alamat');

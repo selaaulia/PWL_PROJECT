@@ -20,13 +20,8 @@
                             </ul>
                         </div>
                     @endif
-                    @if (Auth::user()->role == 'admin')
                         <form method="post" action="/admin/petugas/{{ $petugas->id }}" id="myForm"
                             enctype="multipart/form-data">
-                        @else
-                            <form method="post" action="/petugas/petugas/{{ $petugas->id }}" id="myForm"
-                                enctype="multipart/form-data">
-                    @endif
                     @csrf
                     @method('PUT')
                     <form method="post" action="{{ route('petugas.update', $petugas->id) }}" id="myForm">
@@ -36,11 +31,6 @@
                             <label for="username">Username</label>
                             <input type="username" name="username" class="form-control" id="username" aria-describedby="username"
                                 value="{{ $petugas->user->username }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="id">Id</label>
-                            <input type="text" name="id" class="form-control" id="id" aria-describedby="id"
-                                value="{{ $petugas->id }}">
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>
