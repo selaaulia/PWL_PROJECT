@@ -23,4 +23,9 @@ class Buku extends Model
         'tahun',
         'jumlah',
     ];
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class);
+    }
 }

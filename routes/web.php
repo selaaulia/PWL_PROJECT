@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -56,6 +57,9 @@ Route::middleware(['auth'])->group(function () {
             //CRUD Admin
             Route::get('/admin/cari/', [AdminController::class, 'search']);
             Route::resource('/admin', AdminController::class);
+
+            //CRUD Peminjaman
+            Route::resource('/peminjaman', PeminjamanController::class);
         });
     });
 
