@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['admin'])->group(function () {
         Route::prefix('admin')->group(function () {
-            Route::get('/', [AdminController::class, 'index']);
+            Route::get('/', [AdminController::class, 'home']);
 
             //CRUD Anggota
             Route::get('/anggota/cari/', [AnggotaController::class, 'search']);
@@ -52,6 +52,10 @@ Route::middleware(['auth'])->group(function () {
             //CRUD Petugas
             Route::get('/petugas/cari/', [PetugasController::class, 'search']);
             Route::resource('/petugas', PetugasController::class);
+
+            //CRUD Admin
+            Route::get('/admin/cari/', [AdminController::class, 'search']);
+            Route::resource('/admin', AdminController::class);
         });
     });
 
