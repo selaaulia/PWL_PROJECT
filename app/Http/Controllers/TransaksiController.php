@@ -92,7 +92,7 @@ class TransaksiController extends Controller
     public function edit($id)
     {
         $pinjam = Peminjaman::join('anggotas', 'peminjaman.anggota_id', '=', 'anggotas.Nim')->join('bukus', 'peminjaman.buku_id', '=', 'bukus.id_buku')
-            ->where('peminjaman.anggota_id', '=', $id)
+            ->where('peminjaman.anggota_id', '=', $id)->where('peminjaman.status', '!=', 'konfirmasi')
             ->get(['peminjaman.*', 'anggotas.*', 'bukus.judul_buku']);
         $anggota = Anggota::with('user')->where('Nim', $id)->first();
         return view('petugas.peminjaman.edit', compact('pinjam', 'anggota'));
@@ -180,6 +180,10 @@ class TransaksiController extends Controller
     {
         $pinjam = Peminjaman::find($id);
         $pinjam->status = 'dipinjam';
+        $buku_id = $pinjam->buku_id;
+        $buku = Buku::find($buku_id);
+        $buku->jumlah -= $pinjam->jumlah;
+        $buku->save();
         $pinjam->save();
         return redirect()->to('/petugas/transaksi/konfirmasi')->with('success', 'Konfirmasi Peminjaman Berhasil!');
     }

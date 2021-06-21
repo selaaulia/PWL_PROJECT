@@ -174,7 +174,7 @@ $(document).on('click', '#Button', function(event) {
             "lengthChange": false,
             "searching": true,
             "ordering": true,
-            "order": [[4, 'desc']],
+            "order": [[5, 'desc']],
             "info": false,
             "autoWidth": false,
             "responsive": true,
