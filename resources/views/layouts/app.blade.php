@@ -9,6 +9,14 @@
 
     <title>@yield('title')</title>
 
+    <link rel="stylesheet" type="text/css" href="css/Login.css">
+    <link rel="stylesheet" type="text/css" href="css/Register .css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="jquery-3.5.1.js"></script>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -22,24 +30,21 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <div class="judul" style="text-align: center;">
+        <p class="judul1">WELCOME<br><br></p>
+        <p class="judul2">"READING IS A PASSPORT<br><br>TO COUNTLESS ADVENTURES"<br><br>- Mary Pope Osborne -</p>
+        <br><br>
+        @auth
+            <a class="judul1" style="color: white; font-size:20px" href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
+        @else
+            <a class="judul1" style="color: white; font-size:20px" href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
+            <br><br>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+            @if (Route::has('register'))
+                <a class="judul1" style="color: white; font-size:20px" href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+            @endif
+        @endauth            
+    </div>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

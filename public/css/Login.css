@@ -1,0 +1,54 @@
+.judul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color: black;
+    height: 100%; /* Full height */
+    position: fixed; /* Make it stick, even on scroll */
+    overflow: auto; /* Enable scrolling if the sidenav has too much content */
+    color: white;
+    text-align: center;
+}
+.judul .judul1{
+    font-family: 'Lucida Sans';
+    font-size: 33px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 30px;
+}
+.judul .judul2{
+    font-family: 'Courier New';
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    font-weight: 30px;
+    margin-bottom: 50px;
+}
+.judul .a:hover{
+    background-color: beige;
+	color: black;
+}
+.container{
+    width: 75%;
+    height: 100%;
+    float: right;
+    background-image: url(3.jpg);
+    background-repeat: repeat-y;
+    text-align: center;
+    align-content: center;
+    font-style: 50px, sans-serif;
+    font-weight: bold;
+}
+.Login{
+    width: 50%;
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0.25);
+    color: white;
+    font-family: 'Lucida Sans';
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-left : auto;
+    margin-right: auto;
+    align-items: center;
+}
