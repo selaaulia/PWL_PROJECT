@@ -7,6 +7,7 @@ use App\Models\Buku;
 use App\Models\User;
 use App\Models\Petugas;
 use App\Models\Admin;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -166,7 +167,9 @@ class AdminController extends Controller
     {
         $a = Anggota::all();
         $b = Buku::all();
+        $p = Petugas::all();
+        $pin = Peminjaman::all();
         $user= Auth::user();
-        return view('admin.home', compact('user'));
+        return view('admin.home', compact('user', 'a', 'b', 'p', 'pin'));
     }
 }
