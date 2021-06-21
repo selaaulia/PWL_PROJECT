@@ -42,7 +42,7 @@
    <body>
         <div class="judul" style="text-align: center;">
             <p class="judul1">WELCOME<br><br></p>
-            <p class="judul2">"The Book<br><br>You Don't Read<br><br>Won't Help"</p>
+            <p class="judul2">"READING IS A PASSPORT<br><br>TO COUNTLESS ADVENTURES"<br><br>- Mary Pope Osborne -</p>
             <br><br>
             @auth
                 <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
@@ -58,22 +58,21 @@
         </div>
         <div class="container">
             <p style="font-weight: 80px; text-align: center; font-family:'Georgia'; font-size: 50px;
-            margin-top: 80px; position: relative; margin-right:50px; margin-left:150px; font-weight: bold;">TAMA ART UNIVERSITY LIBRARY</p>
+            margin-top: 80px; position: relative; margin-right:50px; margin-left:150px; font-weight: bold;">POLINEMA LIBRARY</p>
             <br><br>
             <p style="font-weight: 100px; text-align: center; font-family:'Georgia'; font-size: 30px; position: relative; margin-right:80px; font-weight: bold; margin-left:150px;">
-                "Freedom and Will"<br>
-                The Ideology of Tama Art University<p>
+                "Freedom and Will"<br> <p>
 
             <img style="margin-right: 80px; margin-left:150px;" src="images/BG01.jpg">
             <br><br>
             <p style="text-align: center; position: relative; margin-right:80px; margin-left:150px; ">Freedom is a matter of the greatest significance, <br>not least because without it there can be no art.<br>
-                 Since its inception, <br>Tama Art University has been dedicated to the pursuit of both freedom and art.</p>
+                 Since its inception, <br>Polinema University has been dedicated to the pursuit of both freedom and art.</p>
                 <br>
             <p style="text-align: center; position: relative; margin-right:80px; margin-left:150px;">However, the concept of freedom incorporated in the university’s ideology is not a gift, but an obligation. <br>
                 Without exercising strong personal will,<br>
                 freedom is reduced to nothing more than a means to an end. 
                 <br>Will creates freedom, and freedom fosters will. 
-                <br>This dialectic forms a strong current underlying the activities of Tama Art University.
+                <br>This dialectic forms a strong current underlying the activities of Polinema University.
             </p>
         </div>
    </body>
