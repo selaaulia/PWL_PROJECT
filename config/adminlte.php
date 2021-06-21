@@ -241,6 +241,19 @@ return [
             'text' => 'Home',
             'url'  => 'admin',
             'icon' => 'fas fa-home',
+            'can' => 'admin-only',
+        ],
+        [
+            'text' => 'Home',
+            'url'  => 'petugas',
+            'icon' => 'fas fa-home',
+            'can' => 'petugas-only',
+        ],
+        [
+            'text' => 'Home',
+            'url'  => 'anggota',
+            'icon' => 'fas fa-home',
+            'can' => 'anggota-only',
         ],
         ['header' => 'Account Setting'],
         [

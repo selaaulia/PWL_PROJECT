@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggota;
 use App\Models\Buku;
+use App\Models\Peminjaman;
 use App\Models\User;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
@@ -174,8 +175,9 @@ class PetugasController extends Controller
     {
         $a = Anggota::all();
         $b = Buku::all();
+        $pin = Peminjaman::all();
         $user= Auth::user();
-        return view('petugas.home', compact('user'));
+        return view('petugas.home', compact('user', 'a', 'b', 'pin'));
     }
 
 
