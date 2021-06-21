@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\PeminjamanAnggotaController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\TransaksiController;
@@ -88,6 +89,14 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('anggota')->group(function () {
             Route::get('/', [AnggotaController::class, 'home']);
 
+            //Peminjaman 
+            Route::get('/pinjam/delete/{id}', [PeminjamanAnggotaController::class, 'delete']);
+            Route::get('/pinjam/perpanjang/{id}', [PeminjamanAnggotaController::class, 'modalPerpanjang']);
+            Route::put('/perpanjang/{id}', [PeminjamanAnggotaController::class, 'perpanjang']);
+            Route::get('/modal/pinjam/{id}', [PeminjamanAnggotaController::class, 'pinjam']);
+            Route::post('/pinjam/{id}', [PeminjamanAnggotaController::class, 'peminjaman']);
+            Route::resource('/pinjam', PeminjamanAnggotaController::class);
+            
             //DATA Buku
             Route::get('/buku', [AnggotaController::class, 'buku']);
             Route::get('/buku/{id}', [AnggotaController::class, 'lihatbuku']);

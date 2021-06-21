@@ -345,7 +345,7 @@ return [
         ],
         [
             'text' => 'Entri Peminjaman',
-            'url'  => '#',
+            'url'  => '/anggota/pinjam',
             'icon' => 'fas fa-share',
             'can' => 'anggota-only',
         ],
