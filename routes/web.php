@@ -5,6 +5,7 @@ use App\Http\Controllers\AnggotaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PeminjamanAnggotaController;
 use App\Http\Controllers\PeminjamanController;
@@ -62,6 +63,10 @@ Route::middleware(['auth'])->group(function () {
 
             //CRUD Peminjaman
             Route::resource('/peminjaman', PeminjamanController::class);
+
+            // Laporan
+            Route::get('/laporan/cetak_pdf', [LaporanController::class, 'cetak_pdf'])->name('admin.cetak_pdf');
+            Route::resource('/laporan', LaporanController::class);
         });
     });
 
@@ -82,6 +87,9 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/transaksi/perpanjang/{id}', [TransaksiController::class, 'perpanjang']);
             Route::resource('/transaksi', TransaksiController::class);
 
+            // Laporan
+            Route::get('/laporan/cetak_pdf', [LaporanController::class, 'cetak_pdf'])->name('petugas.cetak_pdf');
+            Route::resource('/laporan', LaporanController::class);
         });
     });
 
@@ -96,7 +104,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/modal/pinjam/{id}', [PeminjamanAnggotaController::class, 'pinjam']);
             Route::post('/pinjam/{id}', [PeminjamanAnggotaController::class, 'peminjaman']);
             Route::resource('/pinjam', PeminjamanAnggotaController::class);
-            
+
             //DATA Buku
             Route::get('/buku', [AnggotaController::class, 'buku']);
             Route::get('/buku/{id}', [AnggotaController::class, 'lihatbuku']);
