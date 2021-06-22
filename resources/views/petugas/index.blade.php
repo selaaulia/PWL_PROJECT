@@ -12,13 +12,6 @@
                     @else
                         <form action="/petugas/petugas/cari/" method="GET">
                 @endif
-
-                <div class="input-group">
-                    <input type="text" name="keyword" class="form-control" placeholder="Search users...">
-                    <button type="submit" class="btn btn-primary">
-                        Search
-                    </button>
-                </div>
                 </form>
             </div>
 

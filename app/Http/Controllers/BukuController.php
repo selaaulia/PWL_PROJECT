@@ -167,7 +167,14 @@ class BukuController extends Controller
     public function destroy($id)
     {
         Buku::find($id)->delete();
-        return redirect()->route('buku.index')->with('success', 'Buku Berhasil Dihapus');
+
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to('/admin/buku')
+                ->with('success', 'Buku Berhasil Dihapus');
+        } else {
+            return redirect()->to('/petugas/buku')
+                ->with('success', 'Buku Berhasil Dihapus');
+        }
     }
 
     public function search(Request $request)

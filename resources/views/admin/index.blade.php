@@ -10,15 +10,8 @@
                 @if (Auth::user()->role == 'admin')
                     <form action="/admin/admin/cari/" method="GET">
                     @else
-                        <form action="/admin/admin/cari/" method="GET">
+                    <form action="/admin/admin/cari/" method="GET">
                 @endif
-
-                <div class="input-group">
-                    <input type="text" name="keyword" class="form-control" placeholder="Search users...">
-                    <button type="submit" class="btn btn-primary">
-                        Search
-                    </button>
-                </div>
                 </form>
             </div>
 
@@ -38,7 +31,7 @@
         </div>
     @endif
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="example">
         <thead>
             <tr>
                 <th>ID</th>
@@ -89,7 +82,19 @@
             @endforeach
         </tbody>
     </table>
-    <div class="d-flex">
-        {{ $paginate->links() }}
-    </div>
 @endsection
+@section('js')
+<script>
+    $(function () {
+          $('#example').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": false,
+            "autoWidth": false,
+            "responsive": true,
+          });
+        });
+</script>
+@stop

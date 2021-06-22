@@ -88,8 +88,6 @@ class UserController extends Controller
             'nim' => 'numeric',
             'nama' => 'required',
             'no_hp' => 'required',
-            'kelas' => 'required',
-            'jurusan' => 'required',
             'email' => 'required|email',
         ]);
 

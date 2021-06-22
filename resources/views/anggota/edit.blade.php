@@ -21,10 +21,10 @@
                         </div>
                     @endif
                     @if (Auth::user()->role == 'admin')
-                        <form method="post" action="/admin/anggota/{{ $bukus->id_buku }}" id="myForm"
+                        <form method="post" action="/admin/anggota/{{ $Anggota->Nim }}" id="myForm"
                             enctype="multipart/form-data">
                         @else
-                            <form method="post" action="/petugas/anggota/{{ $bukus->id_buku }}" id="myForm"
+                            <form method="post" action="/petugas/anggota/{{ $Anggota->Nim }}" id="myForm"
                                 enctype="multipart/form-data">
                     @endif
                     @csrf

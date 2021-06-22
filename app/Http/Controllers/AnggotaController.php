@@ -177,8 +177,13 @@ class AnggotaController extends Controller
         File::delete('images/' . $anggota->gambar);
         $anggota->delete();
         $user->delete();
-        return redirect()->route('anggota.index')
-            ->with('success', 'anggota Berhasil Dihapus');
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to('/admin/anggota')
+                ->with('success', 'Anggota Berhasil Dihapus');
+        } else {
+            return redirect()->to('/petugas/anggota')
+                ->with('success', 'Anggota Berhasil Dihapus');
+        }
 
     }
 

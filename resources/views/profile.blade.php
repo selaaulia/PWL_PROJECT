@@ -75,7 +75,17 @@
                                 aria-describedby="kelas"
                                 value="{{ $user->Kelas }}">
                         </div>
+                        <div class="form-group">
+                            <label for="no_hp">No Handphone</label>
+                            <input type="no_hp" name="no_hp" class="form-control" id="no_hp" aria-describedby="no_hp"
+                                value="{{ $user->No_Hp }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="Gambar">gambar: </label> <input type="file" class="form-control" name="Gambar"><br>
+                            <img width="100" height="100" src="{{ asset('storage/' . $user->Gambar) }}">
+                        </div>
                         @endif
+
                         @if (Auth::user()->role == 'petugas')
                         <div class="form-group">
                             <label for="tgl_lahir">Tanggal Lahir</label>
@@ -83,25 +93,39 @@
                                 aria-describedby="tgl_lahir" placeholder="Year-Month-Day" autocomplete="off"
                                 value="{{ $user->tgl_lahir }}">
                         </div>
+                        <div class="form-group">
+                            <label for="no_hp">No Handphone</label>
+                            <input type="no_hp" name="no_hp" class="form-control" id="no_hp" aria-describedby="no_hp"
+                                value="{{ $user->no_hp }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat</label>
+                            <input type="alamat" name="alamat" class="form-control" id="alamat" aria-describedby="alamat"
+                                value="{{ $user->alamat }}">
+                        </div>
                         @endif
                         <div class="form-group">
                             <label for="nama">Nama</label>
                             <input type="nama" name="nama" class="form-control" id="nama" aria-describedby="nama"
                                 value="{{ $user->user->name }}">
                         </div>
+                        @if (Auth::user()->role == 'admin')
                         <div class="form-group">
                             <label for="no_hp">No Handphone</label>
                             <input type="no_hp" name="no_hp" class="form-control" id="no_hp" aria-describedby="no_hp"
-                                value="{{ $user->No_Hp }}">
+                                value="{{ $user->no_hp }}">
                         </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat</label>
+                            <input type="alamat" name="alamat" class="form-control" id="alamat" aria-describedby="alamat"
+                                value="{{ $user->alamat }}">
+                        </div>
+                        @endif
+
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" name="email" class="form-control" id="email" aria-describedby="email"
                                 value="{{ $user->user->email }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="Gambar">gambar: </label> <input type="file" class="form-control" name="Gambar"><br>
-                            <img width="100" height="100" src="{{ asset('storage/' . $user->Gambar) }}">
                         </div>
                     </div>
                     <div class="card-footer">
